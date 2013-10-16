@@ -136,6 +136,12 @@ class FeaturePostsOnRootBlog extends FPORB_Plugin {
 		if ( is_main_site() )
 			return;
 
+		global $post;
+		
+		// only want this behaviour on posts post type (filterable in future?)
+		if ( $post->post_type != 'post' )
+			return;
+		
 		$vars = array();
 		$vars[ 'promoted' ] = get_post_meta( get_the_ID(), '_fporb_promoted', true );
 		$this->render_admin( 'promote-meta-box-control.php', $vars );
